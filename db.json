@@ -1,0 +1,15 @@
+{
+  "todoList": [
+    {
+      "text": "learn react",
+      "isDone": true,
+      "id": "lxp16bwV4-c"
+    },
+    {
+      "text": "learn node.js",
+      "isDone": false,
+      "id": "wZhH-zJmcjU"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

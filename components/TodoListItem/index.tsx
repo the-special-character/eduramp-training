@@ -10,7 +10,7 @@ export default function TodoListItem({ data, updateTodo, deleteTodo }) {
             type="checkbox"
             id="is-complete"
             checked={data.isDone}
-            onChange={() => updateTodo(data)}
+            onChange={() => updateTodo({...data, isDone: !data.isDone})}
           />
         </div>
         <p
