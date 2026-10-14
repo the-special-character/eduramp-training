@@ -1,4 +1,4 @@
-export default function TodoListItem({ data, updateTodo }) {
+export default function TodoListItem({ data, updateTodo, deleteTodo }) {
   return (
     <li>
       <div className="flex items-center gap-4">
@@ -21,7 +21,7 @@ export default function TodoListItem({ data, updateTodo }) {
         >
           {data.text}
         </p>
-        <button type="button" className="border p-1">
+        <button type="button" className="border p-1" onClick={() => deleteTodo(data)}>
           Delete Todo
         </button>
       </div>
