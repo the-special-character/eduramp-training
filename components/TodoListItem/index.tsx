@@ -1,4 +1,5 @@
 import { deleteTodoAction, updateTodoAction } from "@/app/actions";
+import { SquareCheck, Square } from 'lucide-react';
 
 export default function TodoListItem({ data }) {
   const deleteTodoActionWithId = deleteTodoAction.bind(null, data.id)
@@ -10,15 +11,9 @@ export default function TodoListItem({ data }) {
           <label htmlFor="is-complete" className="sr-only">
             Complete Todo
           </label>
-          <input
-            type="checkbox"
-            id="is-complete"
-            name="isCompleted"
-            value={data.isDone}
-          />
-          <button type="submit">{
-            data.isDone ? 'complete' : 'not complete'
-            }</button>
+          <button type="submit">
+              {data.isDone ? <SquareCheck /> : <Square />}
+          </button>
         </form>
         <p
           className="flex-1"

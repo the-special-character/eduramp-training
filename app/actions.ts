@@ -2,11 +2,14 @@
 import axios from "axios";
 import { revalidatePath } from "next/cache";
 
+
+
+
 export async function addTodoAction(formData) {
   try {
     // make api call to check duplicate entry
     const todoText = String(formData.get("todoText") ?? "").trim();
-    const response = await axios.post("http://localhost:8000/todoList", {
+    const response = await axios.post("", {
       text: todoText,
       isDone: false,
     });
@@ -20,12 +23,9 @@ export async function updateTodoAction(todoData, formData) {
   try {
     // make api call to check duplicate entry
     
-    const isDone = Boolean(formData.get("isCompleted"))
-
-    
     const { data } = await axios.put(`http://localhost:8000/todoList/${todoData.id}`, {
       ...todoData,
-      isDone
+      isDone: !todoData.isDone
     });
 
     console.log(data);

@@ -7,12 +7,12 @@
     },
     {
       "text": "hello",
-      "isDone": false,
+      "isDone": true,
       "id": "qBimwMbVtM8"
     },
     {
       "text": "test",
-      "isDone": false,
+      "isDone": true,
       "id": "1C0O4QMzNDc"
     },
     {
