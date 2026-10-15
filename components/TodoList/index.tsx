@@ -1,21 +1,17 @@
-import { TodoContext } from "@/context/todoContext";
-import { useContext } from "react";
+import axios from "axios";
+import { notFound } from "next/navigation";
 import TodoListItem from "../TodoListItem";
 
-export default function TodoList() {
-  const { todoList, updateTodo, deleteTodo } = useContext(TodoContext);
+export default async function TodoList() {
+  const { data } = await axios.get("http://localhost:8000/todoList");
+
+  if (!data) notFound();
 
   return (
     <ul className="flex flex-col gap-2 w-full">
-      {todoList
-        .map((list) => (
-          <TodoListItem
-            key={list.id}
-            data={list}
-            updateTodo={updateTodo}
-            deleteTodo={deleteTodo}
-          />
-        ))}
+      {data.map((x) => (
+        <TodoListItem key={x.id} data={x} />
+      ))}
     </ul>
   );
 }

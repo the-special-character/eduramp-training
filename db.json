@@ -1,14 +1,24 @@
 {
   "todoList": [
     {
-      "text": "learn react",
-      "isDone": true,
-      "id": "lxp16bwV4-c"
-    },
-    {
       "text": "learn node.js",
       "isDone": false,
       "id": "wZhH-zJmcjU"
+    },
+    {
+      "text": "hello",
+      "isDone": false,
+      "id": "qBimwMbVtM8"
+    },
+    {
+      "text": "test",
+      "isDone": false,
+      "id": "1C0O4QMzNDc"
+    },
+    {
+      "text": "dkjhasdkjhf",
+      "isDone": false,
+      "id": "cnt5KBQHmXI"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

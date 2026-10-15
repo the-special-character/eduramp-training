@@ -1,20 +1,22 @@
-import { TodoContext } from "@/context/todoContext";
-import { useContext } from "react";
+
+import { addTodoAction } from "@/app/actions";
 
 export default function TodoForm() {
-  const { addTodo, todoTextInputRef } = useContext(TodoContext);
-
   return (
-    <form className="flex" onSubmit={addTodo}>
+    <form action={addTodoAction} className="flex">
       <div>
         <label htmlFor="todo-text" className="sr-only">
           Enter Todo
         </label>
         <input
-          ref={todoTextInputRef}
           type="text"
+          placeholder="Enter your todo here"
           id="todo-text"
+          name="todoText"
           className="border border-r-0 p-2"
+          required
+          maxLength={200}
+          autoComplete="off"
         />
       </div>
       <button type="submit" className="border p-2">

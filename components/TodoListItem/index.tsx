@@ -1,18 +1,25 @@
-export default function TodoListItem({ data, updateTodo, deleteTodo }) {
+import { deleteTodoAction, updateTodoAction } from "@/app/actions";
+
+export default function TodoListItem({ data }) {
+  const deleteTodoActionWithId = deleteTodoAction.bind(null, data.id)
+  const updateTodoActionWithData = updateTodoAction.bind(null, data);
   return (
     <li>
       <div className="flex items-center gap-4">
-        <div>
+        <form action={updateTodoActionWithData}>
           <label htmlFor="is-complete" className="sr-only">
             Complete Todo
           </label>
           <input
             type="checkbox"
             id="is-complete"
-            checked={data.isDone}
-            onChange={() => updateTodo({...data, isDone: !data.isDone})}
+            name="isCompleted"
+            value={data.isDone}
           />
-        </div>
+          <button type="submit">{
+            data.isDone ? 'complete' : 'not complete'
+            }</button>
+        </form>
         <p
           className="flex-1"
           style={{
@@ -21,9 +28,11 @@ export default function TodoListItem({ data, updateTodo, deleteTodo }) {
         >
           {data.text}
         </p>
-        <button type="button" className="border p-1" onClick={() => deleteTodo(data)}>
-          Delete Todo
-        </button>
+        <form action={deleteTodoActionWithId}>
+          <button type="submit" className="border p-1">
+            Delete Todo
+          </button>
+        </form>
       </div>
     </li>
   );

@@ -1,7 +1,7 @@
-"use client";
 import TodoFilter from "@/components/TodoFilter";
 import TodoForm from "@/components/TodoForm";
 import TodoList from "@/components/TodoList";
+
 
 export default function Home() {
   return (
