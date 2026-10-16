@@ -1,18 +1,13 @@
-import TodoFilter from "@/components/TodoFilter";
-import TodoForm from "@/components/TodoForm";
-import TodoList from "@/components/TodoList";
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 
-
-export default async function Home({ searchParams }) {
-  const filters = (await searchParams).filters
+export default async function Home() {
   return (
     <div className="flex flex-col h-screen">
       <main className="flex flex-col flex-1 items-center gap-4 m-8">
-        <h1 className="font-bold text-4xl">Todo App</h1>
-        <TodoForm />
-        <TodoList filters={filters} />
+        <Input />
+        <Button variant="default">Button</Button>
       </main>
-      <TodoFilter />
     </div>
   );
 }

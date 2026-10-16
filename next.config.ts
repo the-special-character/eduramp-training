@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
   },
   cacheComponents: true,
   partialPrefetching: true,
+  images: {
+    domains: ['fakestoreapi.com'],
+    formats: ['image/avif'],
+  },
   turbopack: {
     rules: {
       "*.css": {
