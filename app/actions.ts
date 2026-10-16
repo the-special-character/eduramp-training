@@ -5,17 +5,31 @@ import { revalidatePath } from "next/cache";
 
 
 
-export async function addTodoAction(formData) {
+export async function addTodoAction(prevState, formData) {
   try {
     // make api call to check duplicate entry
     const todoText = String(formData.get("todoText") ?? "").trim();
-    const response = await axios.post("", {
+
+    if(!todoText) {
+      return { success: false, error: 'Todo text is required', values: { todoText }}
+    }
+
+    if(todoText.length > 100) {
+      return { success: false, error: 'Todo text length must be 100 characters or less', values: { todoText }}
+    }
+
+    const { data } = await axios.get(`http://localhost:8000/todoList?text=${todoText}`)    
+    if(data.length > 0) {
+      return { success: false, error: 'text is already exist', values: { todoText }}
+    }
+
+    await axios.post("http://localhost:8000/todoList", {
       text: todoText,
       isDone: false,
     });
     revalidatePath("/")
   } catch (error) {
-
+    return { success: false, error: error.message, values: { todoText: '' }}
   }
 }
 

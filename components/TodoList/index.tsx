@@ -8,7 +8,7 @@ export default async function TodoList({ filters }) {
   if (filters === "completed") url += `?isDone=true`;
   const { data } = await axios.get(url);
 
-  if (!data) notFound();
+  if (!data) throw new Error("Data not found")
 
   return (
     <ul className="flex flex-col gap-2 w-full">
