@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   images: {
-    domains: ['fakestoreapi.com'],
+    remotePatterns: [new URL("https://fakestoreapi.com/img/**")],
     formats: ['image/avif'],
   },
   turbopack: {
