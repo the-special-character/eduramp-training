@@ -3,6 +3,9 @@ import { notFound } from "next/navigation";
 import ProductCard from "@/components/products/productCard";
 import { cacheLife } from "next/cache";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+
+export const instant = false
 
 export type Product = {
   id: number;
@@ -17,26 +20,40 @@ export type Product = {
   };
 };
 
-async function getProducts(): Promise<Product[]> {
+async function getProducts(category: string): Promise<Product[]> {
   "use cache";
   cacheLife("hours");
 
-  const res = await fetch("https://fakestoreapi.com/products");
+  let url = "http://localhost:8000/products";
+  if(category) url += `?category=${category}`
+
+  console.log("url", url);
+  
+
+  const res = await fetch(url);
   if (!res.ok) throw new Error("Failed to load Products");
   return res.json();
 }
 
-export default async function Products() {
-  const products = await getProducts();
+export default async function Products({ searchParams }) {
+  const category = (await searchParams).category
+  const products = await getProducts(category);
+  const categories = [...new Set(products.map((x) => x.category))];
 
   return (
     <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {categories.map((category) => (
+        <Button variant="outline" className="capitalize" asChild>
+          <Link href={`products?category=${category}`}>{category}</Link>
+        </Button>
+      ))}
+
       {products.map((item: Product) => {
         return (
           <li key={item.id}>
-            <a href={`products/${item.id}`} >
+            <Link href={`products/${item.id}`} prefetch={true}>
               <ProductCard product={item} />
-            </a>
+            </Link>
           </li>
         );
       })}
