@@ -1,4 +1,5 @@
 {
+  "users": [],
   "todoList": [
     {
       "text": "learn node.js",
@@ -267,6 +268,5 @@
         "count": 145
       }
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }
