@@ -4,6 +4,7 @@ import ProductCard from "@/components/products/productCard";
 import { cacheLife } from "next/cache";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { requireSession } from "@/lib/session";
 
 export const instant = false
 
@@ -36,6 +37,10 @@ async function getProducts(category: string): Promise<Product[]> {
 }
 
 export default async function Products({ searchParams }) {
+  const { user, session } = await requireSession();
+  console.log(JSON.stringify(user));
+  
+
   const category = (await searchParams).category
   const products = await getProducts(category);
   const categories = [...new Set(products.map((x) => x.category))];

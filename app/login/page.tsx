@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { toast } from "sonner";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -23,6 +22,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { cn } from "cn";
 import axios from "axios";
+import { signIn } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().trim().toLowerCase().pipe(z.email("Invalid email address")),
@@ -36,6 +37,8 @@ const formSchema = z.object({
 });
 
 export default function Login() {
+
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,13 +49,15 @@ export default function Login() {
 
   async function onSubmit(formData: z.infer<typeof formSchema>) {
     try {
-      const { data } = await axios.post(
-        "http://localhost:8080/api/auth/login",
-        formData,
-      );
+      const { error } = await signIn.backend(formData);
 
-      
-      
+      if(error) {
+        form.setError("root", error);
+      }
+
+      router.push("/products");
+      router.refresh();
+
     } catch (error) {}
   }
 
